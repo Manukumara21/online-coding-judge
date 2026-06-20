@@ -1,12 +1,12 @@
 package com.codingjudge.dto;
 
 public class AuthResponse {
-    
+
     private boolean success;
     private String message;
+    private String token;
     private UserDto user;
 
-    // Constructors
     public AuthResponse() {
     }
 
@@ -21,7 +21,13 @@ public class AuthResponse {
         this.user = user;
     }
 
-    // Getters and Setters
+    public AuthResponse(boolean success, String message, String token, UserDto user) {
+        this.success = success;
+        this.message = message;
+        this.token = token;
+        this.user = user;
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -36,6 +42,14 @@ public class AuthResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public UserDto getUser() {

@@ -9,6 +9,7 @@ import com.codingjudge.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.codingjudge.security.JwtUtil;
 
 import java.util.Optional;
 
@@ -17,6 +18,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -30,11 +34,14 @@ public class UserService {
         throw new BadRequestException("Invalid email or password");
     }
 
+    String token = jwtUtil.generateToken(user.getEmail());
+
     UserDto userDto = convertToUserDto(user);
 
     return new AuthResponse(
             true,
             "Login successful",
+            token,
             userDto
     );
 }
