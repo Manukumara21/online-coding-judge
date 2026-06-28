@@ -34,7 +34,10 @@ public class UserService {
         throw new BadRequestException("Invalid email or password");
     }
 
-    String token = jwtUtil.generateToken(user.getEmail());
+    String token = jwtUtil.generateToken(
+        user.getEmail(),
+        user.getRole()
+    );
 
     UserDto userDto = convertToUserDto(user);
 
@@ -68,6 +71,7 @@ public class UserService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole("USER");
 
         // Save to database
         User savedUser = userRepository.save(user);
@@ -96,6 +100,7 @@ public class UserService {
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
+                user.getRole(),
                 user.getCreatedAt(),
                 user.getUpdatedAt()
         );

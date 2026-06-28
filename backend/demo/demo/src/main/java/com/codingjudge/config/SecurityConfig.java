@@ -24,11 +24,18 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/auth/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
+
+        .requestMatchers("/api/auth/**")
+        .permitAll()
+
+        .requestMatchers(
+                "/api/problems",
+                "/api/problems/*"
+        ).hasRole("ADMIN")
+
+                .anyRequest()
+                .authenticated()
+        )
                 .httpBasic(Customizer.withDefaults());
 
         http.addFilterBefore(
