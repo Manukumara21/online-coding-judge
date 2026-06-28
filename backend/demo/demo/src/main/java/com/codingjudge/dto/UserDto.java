@@ -5,6 +5,7 @@ public class UserDto {
     private Long id;
     private String username;
     private String email;
+    private String role;
     private Long createdAt;
     private Long updatedAt;
 
@@ -12,13 +13,20 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String email, Long createdAt, Long updatedAt) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+    public UserDto(Long id,
+               String username,
+               String email,
+               String role,
+               Long createdAt,
+               Long updatedAt) {
+
+    this.id = id;
+    this.username = username;
+    this.email = email;
+    this.role = role;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+}
 
     // Getters and Setters
     public Long getId() {
@@ -59,5 +67,12 @@ public class UserDto {
 
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
